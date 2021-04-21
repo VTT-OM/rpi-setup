@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Docker and Docker Compose installation on Raspberry Pi</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="docker-and-docker-compose-installation-on-raspberry-pi">Docker and Docker Compose installation on Raspberry Pi</h1>
+<h2 id="info">Info</h2>
+<p>Installation instructions for installing docker and docker-compose on Raspberry Pi.</p>
+<p>Command instructions are from the guides below:<br>
+<a href="https://docs.docker.com/engine/install/debian/">docker</a><br>
+<a href="https://docs.docker.com/compose/install/">docker-compose</a></p>
+<h2 id="docker">docker</h2>
+<p>Remove any possible old versions of docker:</p>
+<pre><code>sudo apt-get remove docker docker-engine docker.io containerd runc
+</code></pre>
+<p>Install dependencies:</p>
+<pre><code>sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release
+</code></pre>
+<p>Get docker repository key:</p>
+<pre><code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+</code></pre>
+<p>Add docker repo to apt-get:</p>
+<pre><code>echo &quot;deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</code></pre>
+<p>Update apt-get from repository:</p>
+<pre><code>sudo apt-get update
+</code></pre>
+<p>Install docker:</p>
+<pre><code>sudo apt-get install docker-ce docker-ce-cli containerd.io
+</code></pre>
+<p>Create user group for docker incase it doesn't already exist:</p>
+<pre><code>sudo groupadd docker
+</code></pre>
+<p>Add current user to docker group so no need to &quot;sudo&quot; docker:</p>
+<pre><code>sudo usermod -aG docker $USER
+</code></pre>
+<h2 id="docker-compose">docker-compose</h2>
+<p>Download docker-compose executable:</p>
+<pre><code>sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+</code></pre>
+<p>Apply executable persmissions to the binary:</p>
+<pre><code>sudo chmod +x /usr/local/bin/docker-compose
+</code></pre>
+
+    </body>
+    </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Post flash Raspberry Pi setup instructions</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="post-flash-raspberry-pi-setup-instructions">Post flash Raspberry Pi setup instructions</h1>
+<h2 id="configure-ssh-and-wi-fi">Configure SSH and Wi-Fi</h2>
+<p>After flashing the RPi to an SD card add following files to <code>root</code> of the SD card (boot partition):</p>
+<p>Empty <code>ssh</code> file to enable SSH.</p>
+<p><code>wpa_supplicant.conf</code> with following configuration to enable Wi-Fi on boot:</p>
+<pre><code>country=FI
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+        ssid=&quot;wifi-ssid&quot;
+        psk=&quot;wifi-pass&quot;
+}
+</code></pre>
+<p>Change country code country=<code>FI</code> as needed according to the <a href="https://www.iban.com/country-codes">2 letter country code standard</a>.</p>
+<p>Change ssid=&quot;<code>wifi-ssid</code>&quot; to the network you want the RPi to connect to.</p>
+<p>Change psk=&quot;<code>wifi-pass</code>&quot; to the Wi-Fi password of the network.</p>
+<h2 id="generate-ssh-key-for-login">Generate SSH key for login</h2>
+<p>Create a new key if you don't already have one</p>
+<pre><code>ssh-keygen -t rsa -b 2048
+</code></pre>
+<p>Just hit enter to prompts</p>
+<p>Copy ssh id to Raspberry Pi with user@ip-address:</p>
+<pre><code>ssh-copy-id pi@ip-address
+</code></pre>
+<p>Enter RPi user pasword to prompt</p>
+<p>Now when SSH:ing to RPi you don't need to enter the password anymore. It is recommended to change the password from the default.</p>
+
+    </body>
+    </html>
