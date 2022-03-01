@@ -49,6 +49,10 @@ Download docker-compose executable:
 
     sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
+This might not work so you may need to install using apt:
+
+    sudo apt install docker-compose
+
 Apply executable persmissions to the binary:
 
     sudo chmod +x /usr/local/bin/docker-compose
