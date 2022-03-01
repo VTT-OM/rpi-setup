@@ -25,7 +25,11 @@ Change psk="`wifi-pass`" to the Wi-Fi password of the network.
 
 ## Generate SSH key for login
 
-Create a new key if you don't already have one
+To SSH to RPi wihtout needing to enter the password.  
+It is also recommended to change the password from the default.
+
+### Ubuntu
+Create a new key pair if you don't already have one
 
     ssh-keygen -t rsa -b 2048
 
@@ -37,4 +41,16 @@ Copy ssh id to Raspberry Pi with user@ip-address:
 
 Enter RPi user pasword to prompt
 
-Now when SSH:ing to RPi you don't need to enter the password anymore. It is recommended to change the password from the default.
+### Windows CMD
+Create a new key pair if you don't already have one
+
+    ssh-keygen
+
+Just hit enter to prompts
+
+Copy public key to RPi Authorized keys.
+Insert `{Windows username}`, `{RPi user}` and `{RPi IP address}` to below.
+
+    type C:\Users\{Windows username}\.ssh\id_rsa.pub | ssh {RPi user}@{RPi IP address} "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
+
+Enter RPi user pasword to prompt
